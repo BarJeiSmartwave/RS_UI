@@ -1,5 +1,5 @@
 {
-    "name": "angular1.4-ES6-material-webpack-boilerplate",
+    "name": "rs_ui",
     "version": "1.0.0",
     "description": "A simple AngularJS 1.4 boilerplate using ES6, material design and webpack",
     "main": "index.js",
@@ -10,12 +10,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/shprink/angular1.4-ES6-material-webpack-boilerplate.git"
+        "url": "https://github.com/BarJeiSmartwave/rs_ui.git"
     },
-    "author": "shprink <contact@julienrenaux.fr> (http://julienrenaux.fr/)",
+    "author": "barjei <barjeibarbo@mysale.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/shprink/angular1.4-ES6-material-webpack-boilerplate/issues"
+        "url": "https://github.com/BarJeiSmartwave/rs_ui"
     },
     "dependencies": {
         "angular": "~1.4.8",
@@ -25,7 +25,7 @@
         "angular-ui-router": "^0.2.14",
         "font-awesome": "^4.3.0"
     },
-    "homepage": "https://github.com/shprink/angular1.4-ES6-material-webpack-boilerplate",
+    "homepage": "https://github.com/BarJeiSmartwave/rs_ui",
     "devDependencies": {
         "autoprefixer-loader": "^2.0.0",
         "babel-core": "^5.2.9",
