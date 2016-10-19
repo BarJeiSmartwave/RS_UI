@@ -54,7 +54,7 @@
       </div>
     </md-toolbar>
     <md-content flex layout-padding>
-      <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
+      <md-grid-list md-cols-sm="1" md-cols-md="1" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
         <md-content class="md-padding" layout-xs="column" layout="row">
           <div flex-xs flex-gt-xs="50" layout="column" ng-repeat="(cartItemIndex, cartItem) in items.cart track by $index">
             <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
@@ -90,21 +90,23 @@
     <md-content flex layout-padding>
       <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
         <md-content class="md-padding" layout-xs="column" layout="row">
-          <div flex-xs flex-gt-xs="50" layout="column" ng-repeat="item in items.recommendations">
-            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-              <md-card-title>
-                <md-card-title-text>
-                  <span class="md-headline">{{item.name}}</span>
-                  <span class="md-subhead">{{item.description}}</span>
-                </md-card-title-text>
-                <md-card-title-media>
-                  <div class="md-media-lg card-media">
-                    <img ng-src="{{item.imageUrl}}" width="152">
-                  </div>
-                </md-card-title-media>
-              </md-card-title>
-            </md-card>
-          </div>
+        <!-- <div ng-repeat="recomm in items.recommendations"> -->
+            <div flex-xs flex-gt-xs="50" layout="column" ng-repeat="(recommItemIndex, recommItem) in items.recommendations.item track by $index">
+              <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                  <md-card-title-text>
+                    <span class="md-headline">{{recommItem.name}}</span>
+                    <span class="md-subhead">{{recommItem.description}}</span>
+                  </md-card-title-text>
+                  <md-card-title-media>
+                    <div class="md-media-lg card-media">
+                      <img ng-src="{{recommItem.imageUrl}}" width="152">
+                    </div>
+                  </md-card-title-media>
+                </md-card-title>
+              </md-card>
+            </div>
+          <!-- </div> -->
         </md-content>
       </md-grid-list>
     </md-content>
