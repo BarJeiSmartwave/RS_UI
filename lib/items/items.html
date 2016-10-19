@@ -21,7 +21,7 @@
     <md-content flex layout-padding>
       <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
         <md-content class="md-padding" layout-xs="column" layout="row">
-          <div flex-xs flex-gt-xs="50" layout="column" ng-repeat="item in items.itemsList">
+          <div flex-xs flex-gt-xs="50" layout="column" ng-repeat="item in items.itemsList track by $index">
             <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
               <md-card-title>
                 <md-card-title-text>
@@ -35,7 +35,7 @@
                 </md-card-title-media>
               </md-card-title>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised" ng-click="">view product</md-button>
+                <md-button class="md-raised" ng-click="items.viewProduct(item)">view product</md-button>
                 <md-button class="md-raised md-primary" ng-click="items.addToCart(item)">add to cart</md-button>
               </md-card-actions>
             </md-card>
@@ -56,7 +56,7 @@
     <md-content flex layout-padding>
       <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
         <md-content class="md-padding" layout-xs="column" layout="row">
-          <div flex-xs flex-gt-xs="50" layout="column" ng-repeat="(cartItemIndex, cartItem) in items.cart">
+          <div flex-xs flex-gt-xs="50" layout="column" ng-repeat="(cartItemIndex, cartItem) in items.cart track by $index">
             <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
               <md-card-title>
                 <md-card-title-text>
