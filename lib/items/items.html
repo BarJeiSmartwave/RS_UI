@@ -1,106 +1,102 @@
-<div>
+<div layout="column" layout-align="center center" style="padding:40px" ng-cloak>
+  <p>Select Recommendation System Model</p>
+  <div layout="column" layout-align="center center">
+    <md-select placeholder="RS Models" 
+    ng-model="selectedModel" 
+    md-on-open="items.loadModels()"
+    ng-change="items.modelSelected(selectedModel)"
+    style="min-width: 200px;">
+    <md-option ng-value="rsModel.id" ng-repeat="rsModel in items.rsModels">{{rsModel.name}}</md-option>
+  </md-select>
+</div>
+</div>
 
-  <form ng-cloak>
-    <p>Select RS Model</p>
-
-    <md-radio-group ng-model="selectedModel" ng-change="items.modelSelected(selectedModel)">
-
-      <md-radio-button ng-repeat="rsModel in items.rsModels" ng-value="rsModel.id" class="md-primary">
-        {{ rsModel.name }}
-      </md-radio-button>
-
-    </md-radio-group>    
-  </form>
-
-  <div ng-cloak layout="column" ng-if="items.rsModelSelected">
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2 class="md-flex">Items</h2>
+<div ng-cloak layout="column" ng-if="items.rsModelSelected">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Items</h2>
+    </div>
+  </md-toolbar>
+  <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
+    <md-content class="md-padding" layout-xs="column" layout="row">
+      <div flex-xs flex-gt-xs="33" layout="column" ng-repeat="item in items.itemsList track by $index">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">{{item.name}}</span>
+              <span class="md-subhead">{{item.description}}</span>
+            </md-card-title-text>
+            <md-card-title-media>
+              <div class="md-media-lg card-media">
+                <img ng-src="{{item.imageUrl}}" width="152">
+              </div>
+            </md-card-title-media>
+          </md-card-title>
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button class="md-raised" ng-click="items.viewProduct(item)">view product</md-button>
+            <md-button class="md-raised md-primary" ng-click="items.addToCart(item)">add to cart</md-button>
+          </md-card-actions>
+        </md-card>
       </div>
-    </md-toolbar>
-    <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
+    </md-content>
+  </md-grid-list>
+</div>
+
+<md-divider ng-if="items.rsModelSelected"></md-divider>
+
+<div ng-cloak layout="column" ng-if="items.cartModified">
+  <md-toolbar class="md-warn">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Cart</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    <md-grid-list md-cols-sm="1" md-cols-md="1" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
       <md-content class="md-padding" layout-xs="column" layout="row">
-        <div flex-xs flex-gt-xs="33" layout="column" ng-repeat="item in items.itemsList track by $index">
+        <div flex-xs flex-gt-xs="33" layout="column" ng-repeat="(cartItemIndex, cartItem) in items.cart track by $index">
           <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
             <md-card-title>
               <md-card-title-text>
-                <span class="md-headline">{{item.name}}</span>
-                <span class="md-subhead">{{item.description}}</span>
+                <span class="md-headline">{{cartItem.name}}</span>
+                <span class="md-subhead">{{cartItem.description}}</span>
               </md-card-title-text>
               <md-card-title-media>
                 <div class="md-media-lg card-media">
-                  <img ng-src="{{item.imageUrl}}" width="152">
+                  <img ng-src="{{cartItem.imageUrl}}" width="152">
                 </div>
               </md-card-title-media>
             </md-card-title>
             <md-card-actions layout="row" layout-align="end center">
-              <md-button class="md-raised" ng-click="items.viewProduct(item)">view product</md-button>
-              <md-button class="md-raised md-primary" ng-click="items.addToCart(item)">add to cart</md-button>
+              <md-button class="md-raised md-warn" ng-click="items.removeFromCart($index)">remove</md-button>
             </md-card-actions>
           </md-card>
         </div>
       </md-content>
     </md-grid-list>
-  </div>
-
-  <md-divider></md-divider>
-
-  <div ng-cloak layout="column" ng-if="items.cartModified">
-    <md-toolbar class="md-warn">
-      <div class="md-toolbar-tools">
-        <h2 class="md-flex">Cart</h2>
-      </div>
-    </md-toolbar>
-    <md-content flex layout-padding>
-      <md-grid-list md-cols-sm="1" md-cols-md="1" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
-        <md-content class="md-padding" layout-xs="column" layout="row">
-          <div flex-xs flex-gt-xs="33" layout="column" ng-repeat="(cartItemIndex, cartItem) in items.cart track by $index">
-            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-              <md-card-title>
-                <md-card-title-text>
-                  <span class="md-headline">{{cartItem.name}}</span>
-                  <span class="md-subhead">{{cartItem.description}}</span>
-                </md-card-title-text>
-                <md-card-title-media>
-                  <div class="md-media-lg card-media">
-                    <img ng-src="{{cartItem.imageUrl}}" width="152">
-                  </div>
-                </md-card-title-media>
-              </md-card-title>
-              <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-raised md-warn" ng-click="items.removeFromCart($index)">remove</md-button>
-              </md-card-actions>
-            </md-card>
-          </div>
-        </md-content>
-      </md-grid-list>
-    </md-content>
-  </div>
-
-  <md-divider></md-divider>
-
-  <div ng-cloak layout="column" ng-if="items.cartModified">
-    <md-toolbar class="md-accent">
-      <div class="md-toolbar-tools">
-        <h2 class="md-flex">Recommendations - {{ items.recommendations.description }}</h2>
-      </div>
-    </md-toolbar>
-    <md-content flex layout-padding>
-      <md-grid-list
-      md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
-      md-row-height-gt-md="1:1" md-row-height="2:2"
-      md-gutter="12px" md-gutter-gt-sm="8px">
-
-      <md-grid-tile ng-repeat="recommItem in items.recommendations.item track by $index"
-      md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1">
-      <img ng-src="{{recommItem.imageUrl}}" />
-      <md-grid-tile-footer>
-        <h3>{{recommItem.name}}</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-  </md-grid-list>
-</md-content>
+  </md-content>
 </div>
 
+<md-divider ng-if="items.rsModelSelected"></md-divider>
+
+<div ng-cloak layout="column" ng-if="items.cartModified">
+  <md-toolbar class="md-accent">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Recommendations - {{ items.recommendations.description }}</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    <md-grid-list
+    md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+    md-row-height-gt-md="1:1" md-row-height="2:2"
+    md-gutter="8px" md-gutter-gt-sm="4px">
+    <md-grid-tile ng-repeat="recommItem in items.recommendations.item track by $index"
+    md-rowspan="1" md-colspan="1">
+    <img ng-src="{{recommItem.imageUrl}}" />
+    <md-grid-tile-footer>
+      <h3>{{recommItem.name}}</h3>
+    </md-grid-tile-footer>
+  </md-grid-tile>
+
+</md-grid-list>
+</md-content>
 </div>
