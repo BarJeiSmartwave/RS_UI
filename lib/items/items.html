@@ -11,35 +11,36 @@
 </div>
 </div>
 
-<div ng-cloak layout="column" ng-if="items.rsModelSelected">
+<div ng-cloak layout="column" ng-if="items.rsModelSelected" class="gridListdemoBasicUsage">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <h2 class="md-flex">Items</h2>
     </div>
   </md-toolbar>
-  <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
-    <md-content class="md-padding" layout-xs="column" layout="row">
-      <div flex-xs flex-gt-xs="33" layout="column" ng-repeat="item in items.itemsList track by $index">
-        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">{{item.name}}</span>
-              <span class="md-subhead">{{item.description}}</span>
-            </md-card-title-text>
-            <md-card-title-media>
-              <div class="md-media-lg card-media">
-                <img ng-src="{{item.imageUrl}}" width="152">
-              </div>
-            </md-card-title-media>
-          </md-card-title>
-          <md-card-actions layout="row" layout-align="end center">
-            <md-button class="md-raised" ng-click="items.viewProduct(item)">view product</md-button>
-            <md-button class="md-raised md-primary" ng-click="items.addToCart(item)">add to cart</md-button>
-          </md-card-actions>
-        </md-card>
-      </div>
-    </md-content>
-  </md-grid-list>
+  <div layout-wrap layout="row">
+    <!-- <md-content> -->
+    <div flex="33" ng-repeat="item in items.itemsList track by $index">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}"  
+      md-theme-watch md-rowspan="1" md-colspan="1">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{item.name}}</span>
+          <span class="md-subhead">{{item.description}}</span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-lg card-media">
+            <img ng-src="{{item.imageUrl}}" width="152">
+          </div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <!-- <md-button class="md-raised" ng-click="items.viewProduct(item)">view product</md-button> -->
+        <md-button class="md-raised md-primary" ng-click="items.addToCart(item)">add to cart</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <!-- </md-content> -->
+</div>
 </div>
 
 <md-divider ng-if="items.rsModelSelected"></md-divider>
