@@ -11,38 +11,57 @@
 </div>
 </div>
 
-<div ng-cloak layout="column" ng-if="items.rsModelSelected">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2 class="md-flex">Items</h2>
-    </div>
-  </md-toolbar>
-  <div layout-wrap layout="row">
-    <div flex="25" flex-sm="50" ng-repeat="item in items.itemsList track by $index">
-      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{item.name}}</span>
-            <span class="md-subhead">{{item.description}}</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-lg card-media">
-              <img ng-src="{{item.imageUrl}}" width="152">
-            </div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <!-- <md-button class="md-raised" ng-click="items.viewProduct(item)">view product</md-button> -->
-          <md-button class="md-raised md-primary" ng-click="items.addToCart(item)">add to cart</md-button>
-        </md-card-actions>
-      </md-card>
-    </div>
-  </div>
+<div layout="column" layout-align="center center" style="padding:40px" ng-cloak ng-if="items.modelSelected && !items.isPerItem">
+  <p>Select User</p>
+  <div layout="column" layout-align="center center">
+    <md-select placeholder="Users" 
+    ng-model="selectedUser" 
+    md-on-open="items.loadUserList()"
+    ng-change="items.modelSelected(selectedUser)"
+    style="min-width: 200px;">
+    <md-option ng-value="user.id" ng-repeat="user in items.userList">{{user.name}}</md-option>
+  </md-select>
+</div>
 </div>
 
-<md-divider ng-if="items.rsModelSelected"></md-divider>
+<div ng-cloak layout="column" ng-if="items.isPerItem">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Items</h2>  
+    </div>
+  </md-toolbar>
+  <div layout="column" layout-align="center center">
+   <md-input-container role="search">
+    <label>Search</label>
+    <input ng-model="query" type="text">
+  </md-input-container>  
+</div>
+<div layout-wrap layout="row">
+  <div flex="25" flex-sm="50" ng-repeat="item in items.itemsList | filter:query as searchResult track by $index">
+    <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{item.name}}</span>
+          <span class="md-subhead">{{item.description}}</span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-lg card-media">
+            <img ng-src="{{item.imageUrl}}" width="152">
+          </div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <!-- <md-button class="md-raised" ng-click="items.viewProduct(item)">view product</md-button> -->
+        <md-button class="md-raised md-primary" ng-click="items.addToCart(item)">add to cart</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>
+</div>
 
-<div ng-cloak layout="column" ng-if="items.cartModified">
+<md-divider ng-if="items.cartModified && items.isPerItem"></md-divider>
+
+<div ng-cloak layout="column" ng-if="items.cartModified" ng-show="items.isPerItem">
   <md-toolbar class="md-warn">
     <div class="md-toolbar-tools">
       <h2 class="md-flex">Cart</h2>
@@ -70,9 +89,9 @@
   </div>
 </div>
 
-<md-divider ng-if="items.rsModelSelected"></md-divider>
+<md-divider ng-if="items.cartModified && items.isPerItem"></md-divider>
 
-<div ng-cloak layout="column" ng-if="items.cartModified">
+<div ng-cloak layout="column" ng-if="items.cartModified" ng-show="items.isPerItem">
   <md-toolbar class="md-accent">
     <div class="md-toolbar-tools">
       <h2 class="md-flex">Recommendations - {{ items.recommendations.description }}</h2>
