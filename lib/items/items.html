@@ -5,7 +5,7 @@
     <md-select placeholder="RS Models" 
     ng-model="selectedModel" 
     md-on-open="items.loadModels()"
-    md-selected-text="items.modelSelected(selectedModel)"
+    ng-change="items.modelSelected(selectedModel)"
     style="min-width: 200px;">
     <md-option ng-value="rsModel.id" ng-repeat="rsModel in items.rsModels">{{rsModel.name}}</md-option>
   </md-select>
@@ -19,7 +19,7 @@
     <md-select placeholder="Users" 
     ng-model="selectedUser" 
     md-on-open="items.loadUserList()"
-    md-selected-text="items.userSelected(selectedUser)"
+    ng-change="items.userSelected(selectedUser)"
     style="min-width: 200px;">
     <md-option ng-value="user.id" ng-repeat="user in items.userList">{{user.name}}</md-option>
   </md-select>

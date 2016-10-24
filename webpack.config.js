@@ -1,13 +1,13 @@
 var path = require('path'),
-    webpack = require("webpack"),
-    srcPath = path.join(__dirname, 'src'),
-    wwwPath = path.join(__dirname, 'www'),
-    pkg = require('./package.json'),
-    HtmlWebpackPlugin = require('html-webpack-plugin');
+webpack = require("webpack"),
+libPath = path.join(__dirname, 'lib'),
+wwwPath = path.join(__dirname, 'www'),
+pkg = require('./package.json'),
+HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 var config = {
-    entry: path.join(srcPath, 'index.js'),
+    entry: path.join(libPath, 'index.js'),
     output: {
         path: path.join(wwwPath),
         filename: 'bundle-[hash:6].js'
@@ -39,7 +39,7 @@ var config = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             pkg: pkg,
-            template: path.join(srcPath, 'index.html')
+            template: path.join(libPath, 'index.html')
         }),
 
         // OccurenceOrderPlugin: Assign the module and chunk ids by occurrence count. : https://webpack.github.io/docs/list-of-plugins.html#occurenceorderplugin
@@ -47,7 +47,7 @@ var config = {
 
         // Deduplication: find duplicate dependencies & prevents duplicate inclusion : https://github.com/webpack/docs/wiki/optimization#deduplication
         new webpack.optimize.DedupePlugin()
-    ]
-};
+        ]
+    };
 
-module.exports = config;
+    module.exports = config;
