@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 class ItemsController {
 
     /**
@@ -12,7 +14,7 @@ class ItemsController {
         vm.rsModel = null;
         vm.rsModels = null;
         vm.user = null;
-        vm.userList = [];
+        vm.userList = null;
 
         // cart
         vm.cart = [];
@@ -31,29 +33,26 @@ class ItemsController {
             });
         }
 
-        console.log(vm.rsModelSelected);
-
+        console.log(vm);
     }
 
     loadModels() {
 
         // Use timeout to simulate a 650ms request.
         // return $timeout(function() {
-
             // recommendation system models
-            this.rsModels =  this.rsModels  || [{
+            this.rsModels =  this.rsModels || [{
                 id: 1,
                 name: 'Per Item'
             }, {
                 id: 2,
                 name: 'Per User'
             }];
-
         // }, 650);
     }
 
     modelSelected(selectedModel) {
-        
+
         var thisVal = this;
 
         // console.log(selectedModel);
@@ -70,16 +69,18 @@ class ItemsController {
     }
 
     loadUserList() {
+        var userList = [];
+
+        this.userList = this.userList || userList;
 
         for(var x = 0; x <= 9; x++) {
-            this.userList.push({
+            userList.push({
                 id: x,
-                name: 'BarJei' + x + ' Loba' + x,
+                name: faker.name.findName(),
                 clusterId:  x,
                 clusterName: 'Cluster ' + x
             });
         }
-
     }
 
     viewProduct(item) {
@@ -120,6 +121,10 @@ class ItemsController {
         if(thisScope.cart.length === 0) {
             thisScope.cartModified = false;
         }
+    }
+
+    userSelected(selectedUser) {
+        console.log(selectedUser);
     }
 }
 

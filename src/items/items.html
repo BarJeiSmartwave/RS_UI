@@ -1,29 +1,32 @@
+<!-- rs model select -->
 <div layout="column" layout-align="center center" style="padding:40px" ng-cloak>
   <p>Select Recommendation System Model</p>
   <div layout="column" layout-align="center center">
     <md-select placeholder="RS Models" 
     ng-model="selectedModel" 
     md-on-open="items.loadModels()"
-    ng-change="items.modelSelected(selectedModel)"
+    md-selected-text="items.modelSelected(selectedModel)"
     style="min-width: 200px;">
     <md-option ng-value="rsModel.id" ng-repeat="rsModel in items.rsModels">{{rsModel.name}}</md-option>
   </md-select>
 </div>
 </div>
 
-<div layout="column" layout-align="center center" style="padding:40px" ng-cloak ng-if="items.rsModelSelected && !items.isPerItem">
+<!-- user model -->
+<div layout="column" layout-align="center center" style="padding:40px" ng-cloak ng-show="items.rsModelSelected && !items.isPerItem">
   <p>Select User</p>
   <div layout="column" layout-align="center center">
     <md-select placeholder="Users" 
     ng-model="selectedUser" 
     md-on-open="items.loadUserList()"
-    ng-change="items.modelSelected(selectedUser)"
+    md-selected-text="items.userSelected(selectedUser)"
     style="min-width: 200px;">
     <md-option ng-value="user.id" ng-repeat="user in items.userList">{{user.name}}</md-option>
   </md-select>
 </div>
 </div>
 
+<!-- search box -->
 <div ng-cloak layout="column" ng-if="items.isPerItem">
   <md-toolbar>
     <div class="md-toolbar-tools">
@@ -61,6 +64,7 @@
 
 <md-divider ng-if="items.cartModified && items.isPerItem"></md-divider>
 
+<!-- cart -->
 <div ng-cloak layout="column" ng-if="items.cartModified" ng-show="items.isPerItem">
   <md-toolbar class="md-warn">
     <div class="md-toolbar-tools">
@@ -91,6 +95,7 @@
 
 <md-divider ng-if="items.cartModified && items.isPerItem"></md-divider>
 
+<!-- recommendations -->
 <div ng-cloak layout="column" ng-if="items.cartModified" ng-show="items.isPerItem">
   <md-toolbar class="md-accent">
     <div class="md-toolbar-tools">

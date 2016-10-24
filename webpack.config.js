@@ -1,13 +1,13 @@
 var path = require('path'),
     webpack = require("webpack"),
-    libPath = path.join(__dirname, 'lib'),
+    srcPath = path.join(__dirname, 'src'),
     wwwPath = path.join(__dirname, 'www'),
     pkg = require('./package.json'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 var config = {
-    entry: path.join(libPath, 'index.js'),
+    entry: path.join(srcPath, 'index.js'),
     output: {
         path: path.join(wwwPath),
         filename: 'bundle-[hash:6].js'
@@ -39,7 +39,7 @@ var config = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             pkg: pkg,
-            template: path.join(libPath, 'index.html')
+            template: path.join(srcPath, 'index.html')
         }),
 
         // OccurenceOrderPlugin: Assign the module and chunk ids by occurrence count. : https://webpack.github.io/docs/list-of-plugins.html#occurenceorderplugin
