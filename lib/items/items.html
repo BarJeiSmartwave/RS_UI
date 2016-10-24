@@ -96,7 +96,7 @@
 <md-divider ng-if="items.cartModified && items.isPerItem"></md-divider>
 
 <!-- recommendations -->
-<div ng-cloak layout="column" ng-if="items.cartModified" ng-show="items.isPerItem">
+<div ng-cloak layout="column" ng-if="items.cartModified || items.userIsSelected">
   <md-toolbar class="md-accent">
     <div class="md-toolbar-tools">
       <h2 class="md-flex">Recommendations - {{ items.recommendations.description }}</h2>
